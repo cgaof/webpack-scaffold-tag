@@ -391,10 +391,11 @@ if (!window.clearImmediate) {
         }
         var eventX = clientX - rect.left;
         var eventY = clientY - rect.top;
-
-        var x = Math.floor(eventX * ((canvas.width / rect.width) || 1) / g);
-        var y = Math.floor(eventY * ((canvas.height / rect.height) || 1) / g);
-
+        // console.log(eventX, canvas.width, rect.width,  g, 'infoGrid');
+        var dpr = window.devicePixelRatio || 1;
+        var x = Math.floor(eventX * ((canvas.width / rect.width) || 1) / g) + dpr;
+        var y = Math.floor(eventY * ((canvas.height / rect.height) || 1) / g)  + dpr*dpr;
+        // console.log(eventX, canvas.width, rect.width, x, y, g, 'infoGrid');
         return infoGrid[x][y];
       };
 
@@ -1027,17 +1028,6 @@ if (!window.clearImmediate) {
         /* Determine bgPixel by creating
            another canvas and fill the specified background color. */
         var bctx = document.createElement('canvas').getContext('2d');
-        console.log('duu', options, bctx);
-        // ///////////////////
-        // var img = new Image();
-        // img.crossOrigin = "Anonymous";
-        // img.onload = function () {
-        //   bctx.drawImage(img, 0, 0, img.width, img.height);
-        // }
-        // console.log( options.imageShape, ' options.imageShape');
-        
-        // img.src = options.imageShape;
-        // ////////////////////
         bctx.fillStyle = settings.backgroundColor;
         bctx.fillRect(0, 0, 1, 1);
         var bgPixel = bctx.getImageData(0, 0, 1, 1).data;

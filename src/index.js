@@ -22,9 +22,9 @@ window.onload = function () {
     maxRotation: -1.57080,
     rotateRatio: .4,
     fontSizeFactor: 150,   // 当词云值相差太大，可设置此值进字体行大小微调，默认0.1
-    maxFontSize: 25,  // 最大fontSize，用来控制weightFactor，默认60
+    maxFontSize: 45,  // 最大fontSize，用来控制weightFactor，默认60
     minFontSize: 10,
-    gridSize: 1,
+    gridSize: 2,
     ratationSteps: 2,
     rotationRation: .5,
     shuffle: 30,
