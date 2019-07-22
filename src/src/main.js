@@ -3,8 +3,8 @@ require('./css/spin.css')
 var util = require('./util').default
 
 const LODAING_WRAPPTER_HTML_PRE = '<div class="__wc_loading_wrapper__">' +
-                                    '<div style="padding-left: 60px;" class="__wc_loading_wrapper_item__">' +
-                                    '<div class="__wc_loading_wrapper_item_inner__">'
+    '<div style="padding-left: 60px;" class="__wc_loading_wrapper_item__">' +
+    '<div class="__wc_loading_wrapper_item_inner__">'
 const LODAING_WRAPPTER_HTML_END = '</div></div></div>'
 
 export default class Js2WordCloud {
@@ -28,9 +28,9 @@ export default class Js2WordCloud {
         this._fixWeightFactor(this._option)
         this._maskCanvas = null
         var hoverCb = (item, dimension, event) => {
-            if(item) {
+            if (item) {
                 var html = item[0] + ': ' + item[1]
-                if(typeof this._option.tooltip.formatter === 'function') {
+                if (typeof this._option.tooltip.formatter === 'function') {
                     html = this._option.tooltip.formatter(item)
                 }
                 this._tooltip.innerHTML = html
@@ -45,9 +45,9 @@ export default class Js2WordCloud {
             __originHoverCb && __originHoverCb(item, dimension, event)
         }
         if (option.tooltip && option.tooltip.show === true) {
-            if(!this._tooltip) {
+            if (!this._tooltip) {
                 this._tooltip = window.document.createElement('div')
-                this._tooltip.className="__wc_tooltip__"
+                this._tooltip.className = "__wc_tooltip__"
                 this._tooltip.style.backgroundColor = option.tooltip.backgroundColor || 'rgba(0, 0, 0, 0.701961)'
                 this._tooltip.style.color = '#fff'
                 this._tooltip.style.padding = '5px'
@@ -70,8 +70,10 @@ export default class Js2WordCloud {
             this._option.hover = hoverCb
         }
         _sortWorldCloud(this._option);
-        
+
         if (this._option && /\.(jpg|png)$/.test(this._option.imageShape)) {
+            console.log('img', '《《 75 行 左右》》');
+
             _imageShape.call(this, this._option)
         } else if (this._option.shape === 'circle') {
             _circle.call(this, this._option)
@@ -91,21 +93,21 @@ export default class Js2WordCloud {
         var loadingTxt;
         const DEFAULT_LOADING_TEXT = '正在加载...'
         const LOADING_LOGO_HTML = '<div class="__wc_loading__">' +
-                                '<div></div>' +
-                                '<div></div>' +
-                                '<div></div>' +
-                                '<div></div>' +
-                                '<div></div>' +
-                                '<div></div>' +
-                                '<div></div>' +
-                                '<div></div>' +
-                            '</div>'
+            '<div></div>' +
+            '<div></div>' +
+            '<div></div>' +
+            '<div></div>' +
+            '<div></div>' +
+            '<div></div>' +
+            '<div></div>' +
+            '<div></div>' +
+            '</div>'
         if (loadingOption) {
-            if(loadingOption.backgroundColor) {
+            if (loadingOption.backgroundColor) {
                 this._dataMask.style.backgroundColor = loadingOption.backgroundColor
             }
             loadingTxt = loadingOption.text === undefined ? DEFAULT_LOADING_TEXT : loadingOption.text
-            if(loadingOption.effect === 'spin') {
+            if (loadingOption.effect === 'spin') {
                 this._showMask(LODAING_WRAPPTER_HTML_PRE + LOADING_LOGO_HTML + loadingTxt + LODAING_WRAPPTER_HTML_END)
                 var dom = this._dataMask.childNodes[0].childNodes[0]
                 var paddingLeft = dom.style.paddingLeft
@@ -119,7 +121,7 @@ export default class Js2WordCloud {
     }
 
     hideLoading() {
-        if(this._dataMask) {
+        if (this._dataMask) {
             this._dataMask.style.display = 'none'
         }
     }
@@ -132,6 +134,8 @@ export default class Js2WordCloud {
     }
 
     _init() {
+        console.log('this._container.clientWidth 大概137行', this._container.clientWidth);
+
         let width = this._container.clientWidth;
         let height = this._container.clientHeight;
         this._container.innerHTML = ''
@@ -165,20 +169,20 @@ export default class Js2WordCloud {
     _fixWeightFactor(option) {
         option.maxFontSize = typeof option.maxFontSize === 'number' ? option.maxFontSize : 60
         option.minFontSize = typeof option.minFontSize === 'number' ? option.minFontSize : 12
-        if(option.list && option.list.length > 0){
+        if (option.list && option.list.length > 0) {
             var min = option.list[0][1]
             var max = 0
-            for(var i = 0, len = option.list.length; i < len; i++ ) {
-                if(min > option.list[i][1]) {
+            for (var i = 0, len = option.list.length; i < len; i++) {
+                if (min > option.list[i][1]) {
                     min = option.list[i][1]
                 }
-                if(max < option.list[i][1]) {
+                if (max < option.list[i][1]) {
                     max = option.list[i][1]
                 }
             }
-            
+
             //用y=ax^r+b公式确定字体大小
-            if(max > min){
+            if (max > min) {
                 var r = typeof option.fontSizeFactor === 'number' ? option.fontSizeFactor : 1 / 10
                 var a = (option.maxFontSize - option.minFontSize) / (Math.pow(max, r) - Math.pow(min, r))
                 var b = option.maxFontSize - a * Math.pow(max, r)
@@ -189,7 +193,7 @@ export default class Js2WordCloud {
                     // var s = Math.ceil((size / max) * x + y)
                     // return s
                 }
-            }else{
+            } else {
                 option.weightFactor = function (size) {
                     return option.minFontSize
                 }
@@ -198,7 +202,7 @@ export default class Js2WordCloud {
     }
 
     _showMask(innerHTML) {
-        if(this._dataMask) {
+        if (this._dataMask) {
             this._dataMask.innerHTML = innerHTML
             if (innerHTML === '') {
                 this._dataMask.style.display = 'none'
@@ -218,8 +222,11 @@ function _sortWorldCloud(option) {
 }
 
 function _renderShape(option) {
+    console.log(option, this, 'option');
+
     if (this._maskCanvas) {
         option.clearCanvas = false
+        console.log('this._maskCanvas', this._maskCanvas);
 
         /* Determine bgPixel by creating
          another canvas and fill the specified background color. */
@@ -258,28 +265,44 @@ function _renderShape(option) {
 
         ctx = this._canvas.getContext('2d')
         ctx.clearRect(0, 0, this._canvas.width, this._canvas.height)
+        console.log(maskCanvasScaled, 'maskCanvasScaled');
+
         ctx.drawImage(maskCanvasScaled, 0, 0);
     }
 
-    if(this._dataEmpty() && option && option.noDataLoadingOption) {
+    if (this._dataEmpty() && option && option.noDataLoadingOption) {
         var STYLE = ''
-        if(option.noDataLoadingOption.textStyle) {
-            if(typeof option.noDataLoadingOption.textStyle.color === 'string') {
-                STYLE += ('color: ' + option.noDataLoadingOption.textStyle.color + ';') 
+        if (option.noDataLoadingOption.textStyle) {
+            if (typeof option.noDataLoadingOption.textStyle.color === 'string') {
+                STYLE += ('color: ' + option.noDataLoadingOption.textStyle.color + ';')
             }
-            if(typeof option.noDataLoadingOption.textStyle.fontSize === 'number') {
-                STYLE += ('font-size: ' + option.noDataLoadingOption.textStyle.fontSize + 'px;') 
+            if (typeof option.noDataLoadingOption.textStyle.fontSize === 'number') {
+                STYLE += ('font-size: ' + option.noDataLoadingOption.textStyle.fontSize + 'px;')
             }
         }
-        if(typeof option.noDataLoadingOption.backgroundColor === 'string') {
+        if (typeof option.noDataLoadingOption.backgroundColor === 'string') {
             this._dataMask.style.backgroundColor = option.noDataLoadingOption.backgroundColor
         }
         var TEXT = option.noDataLoadingOption.text || ''
         this._showMask(LODAING_WRAPPTER_HTML_PRE + '<span class="__wc_no_data_text__" style="' + STYLE + '">' + TEXT + '</span>' + LODAING_WRAPPTER_HTML_END)
     } else {
+
         this._showMask('');
+        console.log('WordCloud', '大概287行 调用 wordC', document, this._canvas, option);
         this._wordcloud2 = WordCloud(this._canvas, option)
     }
+    // setTimeout(() => {
+        console.log(this._canvas, option, 'this._canvas 大概166');
+        var bctx = this._canvas.getContext('2d');
+        var img = new Image();
+        img.crossOrigin = "Anonymous";
+        img.onload = function () {
+            bctx.drawImage(img, 0, 0, img.width * 3, img.height*3);
+        }
+        console.log(option.imageShape, ' options.imageShape');
+        img.src = option.imageShape;
+    // }, 0);
+
 }
 
 
@@ -308,13 +331,13 @@ function _circle(option) {
             // Area not to draw
             newImageData.data[i] =
                 newImageData.data[i + 1] =
-                    newImageData.data[i + 2] = 255
+                newImageData.data[i + 2] = 255
             newImageData.data[i + 3] = 0
         } else {
             // Area to draw
             newImageData.data[i] =
                 newImageData.data[i + 1] =
-                    newImageData.data[i + 2] = 0
+                newImageData.data[i + 2] = 0
             newImageData.data[i + 3] = 255
         }
     }
@@ -329,9 +352,11 @@ function _imageShape(option) {
         this._maskCanvas = window.document.createElement('canvas')
         this._maskCanvas.width = img.width
         this._maskCanvas.height = img.height
-
+        console.log(img, img.width, img.height, 'img');
         var ctx = this._maskCanvas.getContext('2d')
+        // ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, 100, 100);
         ctx.drawImage(img, 0, 0, img.width, img.height)
+
 
         var imageData = ctx.getImageData(
             0, 0, this._maskCanvas.width, this._maskCanvas.height)
@@ -347,13 +372,13 @@ function _imageShape(option) {
                 // Area not to draw
                 newImageData.data[i] =
                     newImageData.data[i + 1] =
-                        newImageData.data[i + 2] = 255;
+                    newImageData.data[i + 2] = 255;
                 newImageData.data[i + 3] = 0;
             } else {
                 // Area to draw
                 newImageData.data[i] =
                     newImageData.data[i + 1] =
-                        newImageData.data[i + 2] = 0;
+                    newImageData.data[i + 2] = 0;
                 newImageData.data[i + 3] = 255;
             }
         }
@@ -361,9 +386,10 @@ function _imageShape(option) {
         _renderShape.call(this, option);
     };
 
-    img.onerror = function(){
+    img.onerror = function () {
         _renderShape.call(this, option);
     };
+    console.log(option.imageShape, ' main -> option.imageShape');
     img.src = option.imageShape;
 }
 
