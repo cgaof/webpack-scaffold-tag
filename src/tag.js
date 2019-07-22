@@ -1,1 +1,0 @@
-export let name = '900000000';

@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-
 /*
  * SplitChunksPlugin is enabled by default and replaced
  * deprecated CommonsChunkPlugin. It automatically identifies modules which
@@ -35,9 +34,9 @@ module.exports = {
 	},
 
 	plugins: [new webpack.ProgressPlugin(), new HtmlWebpackPlugin({
-		title:"title",
-		template:"./index.html",
-		inject:true
+		title: "title",
+		template: "./index.html",
+		inject: true
 	})],
 
 	module: {
@@ -59,8 +58,23 @@ module.exports = {
 						]
 					]
 				}
-			}
-		]
+			},
+			{
+				test: /\.css$/, // 开发环境不提取css
+				use: ['style-loader', 'css-loader']
+			},
+			{
+				test: /\.(png|jpg|gif|svg)$/,
+				use: [{ // 图片文件小于8k时编译成dataUrl直接嵌入页面，超过8k回退使用file-loader
+					loader: 'url-loader',
+					options: {
+						limit: 8192, // 8k
+						name: 'img/[name].[ext]', // 回退使用file-loader时的名称
+						fallback: 'file-loader', // 当超过8192byte时，会回退使用file-loader
+					}
+				}]
+			},
+		],
 	},
 
 	optimization: {
