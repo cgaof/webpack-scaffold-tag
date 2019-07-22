@@ -689,7 +689,6 @@ if (!window.clearImmediate) {
     /* Actually draw the text on the grid */
     var drawText = function drawText(gx, gy, info, word, weight,
       distance, theta, rotateDeg, attributes) {
-
       var fontSize = info.fontSize;
       var color;
       if (getTextColor) {
@@ -759,6 +758,8 @@ if (!window.clearImmediate) {
           var transformRule = '';
           transformRule = 'rotate(' + (- rotateDeg / Math.PI * 180) + 'deg) ';
           if (info.mu !== 1) {
+            console.log('90');
+            
             transformRule +=
               'translateX(-' + (info.fillTextWidth / 4) + 'px) ' +
               'scale(' + (1 / info.mu) + ')';

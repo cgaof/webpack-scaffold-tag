@@ -13,7 +13,7 @@ window.onload = function () {
         return item[0] + ': 价值¥' + item[1] + '<br>' + '词云图'
       },
     },
-    imageShape: '../images/manIcon.png', // 图片形状
+    imageShape: '../images/womanIcon.png', // 图片形状
     // backgroundColor: '#000', // canvas 背景
     list: arr1, // 数据
     color: 'random-dark', // 字体颜色
@@ -29,6 +29,7 @@ window.onload = function () {
     rotationRation: .5,
     shuffle: 30,
     fontWeight: 'bold',
+    // color: '#15a4fa',
     // shape: 'circle',
     // cardioid: 'diamond'
     // cardioid: 'square'

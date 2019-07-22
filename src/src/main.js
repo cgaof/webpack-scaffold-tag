@@ -159,10 +159,15 @@ export default class Js2WordCloud {
 
         this._wrapper.appendChild(this._dataMask)
         this._container.appendChild(this._wrapper)
-
+        /** 
+         * 创建默认的canvas
+        */
         this._canvas = window.document.createElement('canvas')
         this._canvas.width = width
         this._canvas.height = height
+        // this._canvas.style.width = width * 20
+        // this._canvas.style.height= height * 20
+        console.log(this._canvas, 'this._canvas');
         this._wrapper.appendChild(this._canvas)
     }
 
@@ -288,21 +293,21 @@ function _renderShape(option) {
     } else {
 
         this._showMask('');
-        console.log('WordCloud', '大概287行 调用 wordC', document, this._canvas, option);
         this._wordcloud2 = WordCloud(this._canvas, option)
     }
-    // setTimeout(() => {
-        console.log(this._canvas, option, 'this._canvas 大概166');
-        var bctx = this._canvas.getContext('2d');
-        var img = new Image();
-        img.crossOrigin = "Anonymous";
-        img.onload = function () {
-            bctx.drawImage(img, 0, 0, img.width * 3, img.height*3);
-        }
-        console.log(option.imageShape, ' options.imageShape');
-        img.src = option.imageShape;
-    // }, 0);
-
+    /** 
+     * 添加人形 背景
+     * 
+    */
+    console.log(this._canvas, option, 'this._canvas 大概166');
+    var bctx = this._canvas.getContext('2d');
+    var img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.onload = function () {
+        bctx.drawImage(img, 0, 0, img.width * 3, img.height * 3);
+    }
+    console.log(option.imageShape, ' options.imageShape');
+    img.src = option.imageShape;
 }
 
 
