@@ -14,7 +14,7 @@ window.onload = function () {
         return item[0] + ': 价值¥' + item[1] + '<br>' + '词云图'
       },
     },
-    imageShape: '../src/images/man2.png', // 图片形状
+    imageShape: './src/images/man2.png', // 图片形状
     list: arr1, // 数据
     color: 'random-dark', // 字体颜色
     ellipticity: 1,
