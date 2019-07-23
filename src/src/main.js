@@ -302,13 +302,16 @@ function _renderShape(option) {
     console.log(this._canvas, option, 'this._canvas 大概166');
     // var bctx = this._canvas.getContext('2d');
     var bctx = setupCanvas(this._canvas);
-    var img = new Image();
-    img.crossOrigin = "Anonymous";
-    img.onload = function () {
-        bctx.drawImage(img, 0, 0, img.width * 3, img.height * 3);
+    if (option.isShowBackShape) {
+        var img = new Image();
+        img.crossOrigin = "Anonymous";
+        img.onload = function () {
+            bctx.drawImage(img, 0, 0, img.width * 3, img.height * 3);
+        }
+        console.log(option.imageShape, ' options.imageShape');
+        img.src = option.imageShape;
     }
-    console.log(option.imageShape, ' options.imageShape');
-    img.src = option.imageShape;
+
 }
 
 // 添加比例 解决 文字模糊
@@ -323,12 +326,12 @@ function setupCanvas(canvas) {
     canvas.height = rect.height * dpr;
     var ctx = canvas.getContext('2d');
     console.log(dpr, 'dpr');
-    
+
     // Scale all drawing operations by the dpr, so you
     // don't have to worry about the difference.
     ctx.scale(dpr, dpr);
     return ctx;
-  }
+}
 
 
 function _circle(option) {

@@ -29,10 +29,7 @@ window.onload = function () {
     rotationRation: .5,
     shuffle: 30,
     fontWeight: 'bold',
-    // color: '#15a4fa',
-    // shape: 'circle',
-    // cardioid: 'diamond'
-    // cardioid: 'square'
+    isShowBackShape: true, // 显示背景图形
   }
   var wc = new Js2WordCloud(document.getElementById('container'))
   wc.setOption(option)

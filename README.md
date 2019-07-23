@@ -75,6 +75,7 @@ wc.setOption({
         fontSizeFactor: 0.1,                                    // 当词云值相差太大，可设置此值进字体行大小微调，默认0.1
         maxFontSize: 60,                                        // 最大fontSize，用来控制weightFactor，默认60
         minFontSize: 12,                                        // 最小fontSize，用来控制weightFactor，默认12
+        isShowBackShape: false,                                 // 是否显示背景图形
         tooltip: {
             show: true,                                         // 默认：false
             backgroundColor: 'rgba(0, 0, 0, 0.701961)',         // 默认：'rgba(0, 0, 0, 0.701961)'
