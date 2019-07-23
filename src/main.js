@@ -303,10 +303,13 @@ function _renderShape(option) {
     // var bctx = this._canvas.getContext('2d');
     var bctx = setupCanvas(this._canvas);
     if (option.isShowBackShape) {
+        var dpr = window.devicePixelRatio || 1;
+        var cw = this._canvas.width / dpr;
+        var ch = this._canvas.height / dpr;
         var img = new Image();
         img.crossOrigin = "Anonymous";
         img.onload = function () {
-            bctx.drawImage(img, 0, 0, img.width * 3, img.height * 3);
+            bctx.drawImage(img, 0, 0, cw, ch);
         }
         console.log(option.imageShape, ' options.imageShape');
         img.src = option.imageShape;
